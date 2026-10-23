@@ -1,5 +1,5 @@
-#PSYC 259 Homework 4 - Writing functions
-#Optional, for extra credit if all questions are answered
+#PSYC 259 Homework - Writing functions and iteration
+#For full credit, answer at least 5/7 questions
 
 #List names of students collaborating with: 
 
@@ -15,104 +15,62 @@ ds <- tibble(id, x, y, z)
 ### Question 1 ---------- 
 
 #Vectors x, y, and z contain random numbers between 1 and 10. 
-#Write a function called "limit_replace" that will replace values less than 2 or greater than 8 with NA
+#Write a function called "limit_replace" that replaces values less than 2 or greater than 8 with NA
+#The function should take a vector as input and return the replaced-vector as an output
 #Then, run the function on x and save the results to a new vector "x_replace" to show it worked
 
 
 ### Question 2 ---------- 
 
-#Make a new version of limit_replace that asks for arguments for a lower bounary and an upper boundary
-  #so that they can be customized (instead of being hard coded as 2 and 8)
+#Make a new version of limit_replace includes arguments for a lower boundary and an upper boundary
+#so that the limits can be specified (instead of being hard coded as 2 and 8)
 #Run the function on vector y with boundaries 4 and 6, saving the results to a new vector "y_replace"
 
 
 ### Question 3 ----------
 
 #Write a function called "plus_minus_SD" that can take one of the vectors (x/y/z) as input
-  #and "num_of_SDs" as an input and returns the boundaries +/- num_of_SDs around the mean. 
+#and "num_of_SDs" as an input and returns the boundaries +/- num_of_SDs around the mean.
 #plus_minus_SD(x, 1) would give +/- 1SD around the mean of x, plus_minus_SD(y, 2) would give +/- 2SDs around the mean 
 #Make num_of_SDs default to 1
-#run the new function on x, y, and z with 1 SD
+#The output should be a named list two values, lower and upper.
+#Running plus_minus_SD(x) should produce: $lower 2.142724 $upper 8.048324
 
 
 ### Question 4 ----------
-
-#Write an another new version of limit_replace
-#This time, make the upper and lower boundaries optional arguments
-#If they are not given, use +/- 1 SD as the boundaries (from your plus_minus_SD function)
-#Apply the function to each column in ds, and save the results to a new tibble called "ds_replace"
-
+# Use a map function to run the new function on x, y, and z with 1 SD
 
 
 ### Question 5 ----------
 
-#Add a "stopifnot" command to your limit_replace function to make sure it only runs on numeric variables
-#Try running it on a non-numeric input (like "id") to make sure it gives you an error
-
+# Write an another new version of limit_replace
+# This time, make the upper and lower boundaries optional arguments
+# If they are not given, use +/- 1 SD as the boundaries (from your plus_minus_SD function)
+# Apply the function to each column in ds, and save the results to a new tibble called "ds_replace"
+# Hint: you will need an if() statement to handle what to do if boundaries are not given
 
 
 ### Question 6 ----------
+# Question 6 will use the iris dataset
+# Write a species_summary function that takes in a tibble and a species name
+# For example, species_summary(ds_iris, species_name = "setosa")
+# The function should filter to the named species and then calculate  
+# the min, mean, max, and sd for every numeric variable
+# Before returning the summary stats, the function should also write the 
+# summary stats to a file named "SPECIESNAME_summary.csv"
 
-#What other requirements on the input do you need to make the function work correctly?
-#Add another stopifnot to enforce one more requirement
-
+ds_iris <- iris
 
 
 ### Question 7 ----------
-
-#Clear out your workspace and load the built-in diamonds dataset by running the lines below
-#RUN THIS CODE
-rm(list = ls())
-library(tidyverse)
-ds_diamonds <- diamonds
-
-#Save your two functions to an external file (or files) 
-#Then, load your functions from the external files(s)
-#Next, run your limit_replace function on all of the numeric columns in the new data set
-#and drop any rows with NA, saving it to a new tibble named "ds_trimmed"
+# Use some type of iteration to run the species_summary() function 
+# on each of the species in ds_iris, capturing the resulting summary data
+# into a tibble
 
 
-### Question 8 ----------
-
-#The code below makes graphs of diamond price grouped by different variables
-#Refactor it to make it more efficient using functions and/or iteration
-#Don't worry about the order of the plots, just find a more efficient way to make all 6 plots
-#Each cut (Premium/Ideal/Good) should have a plot with trimmed and untrimmed data
-#The title of each plot should indicate which cut and whether it's all vs. trimmed data
-
-ds_diamonds %>% filter(cut == "Premium") %>% 
-  ggplot(aes(x = clarity, y = price)) + 
-  geom_boxplot() + 
-  ggtitle("Premium, all") + 
-  theme_minimal()
-
-ds_diamonds %>% filter(cut == "Ideal") %>% 
-  ggplot(aes(x = clarity, y = price)) + 
-  geom_boxplot() + 
-  ggtitle("Ideal, all") +
-  theme_minimal()
-
-ds_diamonds %>% filter(cut == "Good") %>% 
-  ggplot(aes(x = clarity, y = price)) + 
-  geom_boxplot() + 
-  ggtitle("Good, all") +
-  theme_minimal()
-
-ds_trimmed %>% filter(cut == "Premium") %>% 
-  ggplot(aes(x = clarity, y = price)) + 
-  geom_boxplot() + 
-  ggtitle("Premium, trimmed") + 
-  theme_minimal()
-
-ds_trimmed %>% filter(cut == "Ideal") %>% 
-  ggplot(aes(x = clarity, y = price)) + 
-  geom_boxplot() + 
-  ggtitle("Ideal, trimmed") +
-  theme_minimal()
-
-ds_trimmed %>% filter(cut == "Good") %>% 
-  ggplot(aes(x = clarity, y = price)) + 
-  geom_boxplot() + 
-  ggtitle("Good, trimmed") +
-  theme_minimal()
-
+# If correct, you will have a 3 observation by 16 variable tibble (first 3 columns below)
+# Sepal.Length_min Sepal.Length_mean  Sepal.Length_max 
+# 4.3              5.006              5.8       
+# 4.9              5.936              7.0       
+# 4.9              6.588              7.9       
+# And 3 separate CSV files saved as output
