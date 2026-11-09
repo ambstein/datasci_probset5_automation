@@ -1,5 +1,5 @@
 #PSYC 259 Homework - Writing functions and iteration
-#For full credit, answer at least 5/7 questions
+#For full credit, answer at least 4/7 questions
 
 #List names of students collaborating with: 
 
@@ -18,13 +18,30 @@ ds <- tibble(id, x, y, z)
 #Write a function called "limit_replace" that replaces values less than 2 or greater than 8 with NA
 #The function should take a vector as input and return the replaced-vector as an output
 #Then, run the function on x and save the results to a new vector "x_replace" to show it worked
+limit_replace <- function(lr) {
+  if (lr < 2) {
+    replace(lr, "NA")
+  } else {
+    return(lr)
+  }
+}
 
+limit_replace <- function(vector) {
+  a <- ifelse(vector < "2", "NA", vector)
+  b <- ifelse(a > "8", "NA", a)
+  return(b)
+}
+
+x_replace <- limit_replace(x)
+
+limit_replace(x)
 
 ### Question 2 ---------- 
 
 #Make a new version of limit_replace includes arguments for a lower boundary and an upper boundary
 #so that the limits can be specified (instead of being hard coded as 2 and 8)
 #Run the function on vector y with boundaries 4 and 6, saving the results to a new vector "y_replace"
+
 
 
 ### Question 3 ----------
