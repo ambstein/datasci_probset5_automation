@@ -42,7 +42,13 @@ limit_replace(x)
 #so that the limits can be specified (instead of being hard coded as 2 and 8)
 #Run the function on vector y with boundaries 4 and 6, saving the results to a new vector "y_replace"
 
+limit_replace2 <- function(vector, b1, b2) {
+  c <- ifelse(vector < b1, "NA", vector)
+  d <- ifelse(c > b2, "NA", c)
+  return(d)
+}
 
+y_replace <- limit_replace2(y, 4, 6)
 
 ### Question 3 ----------
 
@@ -53,10 +59,22 @@ limit_replace(x)
 #The output should be a named list two values, lower and upper.
 #Running plus_minus_SD(x) should produce: $lower 2.142724 $upper 8.048324
 
+num_of_SDs <- function(x) sd(x)
+
+plus_minus_SD <- function(vector, sd = NULL) {
+  a <- mean(vector)
+  b <- ifelse(is.null(sd), 1, sd)
+  c <- list(lower = a - b*num_of_SDs(vector), upper = a + b*num_of_SDs(vector))
+  return(c)
+}
+
+plus_minus_SD(x)
 
 ### Question 4 ----------
 # Use a map function to run the new function on x, y, and z with 1 SD
 
+ds <- select(ds, c("x","y","z"))
+map(ds, plus_minus_SD)
 
 ### Question 5 ----------
 
