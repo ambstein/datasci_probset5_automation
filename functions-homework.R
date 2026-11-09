@@ -95,7 +95,7 @@ map(ds, plus_minus_SD)
 
 #this didn't work but was my best guess... i feel like i'm close but just can't figure it out :/
 
-
+# do I need to use str_glue()?
 
 ### Question 6 ----------
 # Question 6 will use the iris dataset
