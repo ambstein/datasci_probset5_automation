@@ -84,6 +84,18 @@ map(ds, plus_minus_SD)
 # Apply the function to each column in ds, and save the results to a new tibble called "ds_replace"
 # Hint: you will need an if() statement to handle what to do if boundaries are not given
 
+# going to try using if_else() from dplyr because it has a "missing" argument
+
+#limit_replace_revised <- function(vector, b1, b2) {
+#  tibble(
+   # c <- if_else(vector < b1, "NA", vector, missing = plus_minus_SD(b1))
+  #  d <- if_else(c > b2, "NA", c, missing = plus_minus_SD(b2))
+ # )
+#}
+
+#this didn't work but was my best guess... i feel like i'm close but just can't figure it out :/
+
+
 
 ### Question 6 ----------
 # Question 6 will use the iris dataset
