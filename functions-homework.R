@@ -2,7 +2,7 @@
 #For full credit, answer at least 4/7 questions
 
 #List names of students collaborating with: 
-
+# Dylan and Sarah
 ### SETUP: RUN THIS BEFORE STARTING ----------
 library(tidyverse)
 set.seed(1)
